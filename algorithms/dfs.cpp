@@ -1,11 +1,10 @@
 #include <iostream>
 #include <vector>
-#include <queue>
 
 using namespace std;
 
 vector<vector <int>> G;
-vector<bool> visited; 
+vector<int> visited;
 
 void createEdge(int u, int v)
 {
@@ -13,28 +12,17 @@ void createEdge(int u, int v)
     // G[v].push_back(u);
 }
 
-void bfs (int source)
+void dfs(int source) 
 {
-    queue<int> q;
-    int u;
-    
     visited[source] = true;
-    q.push(source);
-
-    while (!q.empty()) {
-        u = q.front();
-        q.pop();
-        cout << u << " =>>> ";
-
-        for (auto i = G[u].begin(); i != G[u].end(); i++) {
-            if (!visited[*i]) {
-                q.push(*i);
-                visited[*i] = true;
-            }
+    cout << source << "=>>>";
+    for (auto i = G[source].begin(); i != G[source].end(); i++) {
+        if (!visited[*i]) {
+            dfs(*i);
         }
-
     }
 }
+
 
 int main ()
 {
@@ -52,7 +40,7 @@ int main ()
 
     cin >> source;
 
-    bfs(source);
+    dfs(source);
     cout << "\n";
 
     return 0;

@@ -5,15 +5,13 @@ using namespace std;
 
 int maxSubArray(vector<int> &A) {
     int n = A.size(), maxSum = 0, currSum = 0;
-    vector<int> table(n);
-    table[0] = max(0, A[0]);
-    for (int i = 0; i < n; i++) {
-        if (currSum > currSum + A[i]) {
-            if (maxSum < currSum) maxSum = currSum;
-            currSum = A[i];
-        } else {
-            currSum += A[i];
-        }
+    
+    for (int num:A) {
+        currSum += num;
+
+        if (currSum < 0) currSum = 0;
+        else maxSum = max(maxSum, currSum);
+
     }
 
     return maxSum;
@@ -28,7 +26,7 @@ int main ()
         A.push_back(n);
     }
 
-    cout << maxSubArray(A);
+    cout << maxSubArray(A) << '\n';
 
     return 0;
 }
